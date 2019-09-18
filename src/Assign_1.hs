@@ -13,7 +13,7 @@ macid = "Salehh6"
  - Description: TODO add comments on cubicQ here 
  -}
 cubicQ :: Double -> Double -> Double -> Double
-cubicQ a b c = ((3 * a * c) - (b**2)) / (9 * (a**2)) 
+cubicQ a b c = (((3 * a * c) - (b**2)) / (9 * (a**2)))
 
 {- -----------------------------------------------------------------
  - cubicR
@@ -21,7 +21,7 @@ cubicQ a b c = ((3 * a * c) - (b**2)) / (9 * (a**2))
  - Description: TODO add comments on cubicR here 
  -}
 cubicR :: Double -> Double -> Double -> Double -> Double
-cubicR a b c d = ((9 * a * b * c) - (27 * (a**2) * d) - (2 * (b**3))) / (54 * (a**3))
+cubicR a b c d = (((9 * a * b * c) - (27 * (a**2) * d) - (2 * (b**3))) / (54 * (a**3)))
 
 {- -----------------------------------------------------------------
  - cubicDisc
@@ -29,7 +29,7 @@ cubicR a b c d = ((9 * a * b * c) - (27 * (a**2) * d) - (2 * (b**3))) / (54 * (a
  - Description: TODO add comments on cubicDisc here 
  -}
 cubicDisc :: Double -> Double -> Double
-cubicDisc q r = ((q**3) + (r**2))
+cubicDisc q r = (q**3) + (r**2)
 
 {- -----------------------------------------------------------------
  - cubeRoot
@@ -37,7 +37,9 @@ cubicDisc q r = ((q**3) + (r**2))
  - Description: TODO add comments on cubicS here 
  -}
 cubeRoot :: Double -> Double
-cubeRoot a = (a**(1/3))
+cubeRoot a = if (a < 0.0)
+                then  (-a)**(1/3)
+                else (a)**(1/3)
 
 {- -----------------------------------------------------------------
  - cubicS
@@ -45,7 +47,7 @@ cubeRoot a = (a**(1/3))
  - Description: TODO add comments on cubicS here 
  -}
 cubicS :: Double -> Double -> Double
-cubicS q r = cubeRoot (r + sqrt(cubicDisc q r))
+cubicS q r = cubeRoot (r + sqrt (cubicDisc q r) )
 
 {- -----------------------------------------------------------------
  - cubicT
@@ -53,7 +55,7 @@ cubicS q r = cubeRoot (r + sqrt(cubicDisc q r))
  - Description: TODO add comments on cubicT here 
  -}
 cubicT :: Double -> Double -> Double
-cubicT q r = cubeRoot (r - sqrt(cubicDisc q r))
+cubicT q r = cubeRoot (r - sqrt (cubicDisc q r) )
 
 {- -----------------------------------------------------------------
  - cubicRealSolutions
@@ -61,9 +63,9 @@ cubicT q r = cubeRoot (r - sqrt(cubicDisc q r))
  - Description: TODO add comments on cubicRealSolutions here 
  -}
 cubicRealSolutions :: Double -> Double -> Double -> Double -> [Double]
-cubicRealSolutions a b c d = if ((cubicDisc (cubicQ a b c) (cubicR a b c d)) < 0.0)
+cubicRealSolutions a b c d = if ((cubicDisc (cubicQ a b c) (cubicR a b c d)) < 0)
                                 then []
-                                else if ((cubicDisc (cubicQ a b c) (cubicR a b c d)) > 0.0)
+                                else if ((cubicDisc (cubicQ a b c) (cubicR a b c d)) > 0)
                                     then [x1]
                                     else [x1, x2, x2]
                                         where    x1 = (cubicS (cubicQ a b c) (cubicR a b c d)) + (cubicT (cubicQ a b c) (cubicR a b c d)) - (b / (3 * a))
